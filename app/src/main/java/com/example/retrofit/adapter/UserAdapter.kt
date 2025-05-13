@@ -1,22 +1,19 @@
 package com.example.retrofit.adapter
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.retrofit.DetailActivity
 import com.example.retrofit.R
 import com.example.retrofit.model.User
+import com.example.retrofit.my_interface.ClickItemListener
 
 
 class UserAdapter(
-    private val context: Context,
-    private val mListUsers: MutableList<User>
+    private val mListUsers: MutableList<User>,
+    private val onClick: ClickItemListener
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -30,17 +27,11 @@ class UserAdapter(
         holder.tvTitle.text = user.title
         holder.layoutItem.setOnClickListener {
             // Xử lý khi item được click
-            onClickGoToDetail(user)
+            onClick.onClickItem(user)
         }
     }
 
-    private fun onClickGoToDetail(user: User?) {
-        val intent = Intent(context, DetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putSerializable("object_user", user)
-        intent.putExtras(bundle)
-        context.startActivity(intent)
-    }
+
 
     override fun getItemCount(): Int {
         return mListUsers.size

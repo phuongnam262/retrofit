@@ -1,5 +1,6 @@
 package com.example.retrofit
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit.adapter.UserAdapter
 import com.example.retrofit.my_interface.ApiService
 import com.example.retrofit.model.User
+import com.example.retrofit.my_interface.ClickItemListener
 import retrofit2.Call
 import retrofit2.Callback  // ✅ thêm dòng này
 import retrofit2.Response
@@ -41,7 +43,11 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<User>>
             ) {
                 val mListUser = response.body() ?: emptyList()
-                val userAdapter = UserAdapter(this@MainActivity, mListUser as MutableList<User>)
+                val userAdapter = UserAdapter(mListUser as MutableList<User>, object : ClickItemListener {
+                    override fun onClickItem(user: User) {
+                        onClickGoToDetail(user)
+                    }
+                })
                 mRcvUser.adapter = userAdapter  // ✅ sửa tên biến đúng
             }
 
@@ -49,5 +55,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "onFailure", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    private fun onClickGoToDetail(user: User?) {
+        val intent = Intent(this, DetailActivity::class.java)
+        val bundle = Bundle()
+        bundle.putSerializable("object_user", user)
+        intent.putExtras(bundle)
+        this.startActivity(intent)
     }
 }
