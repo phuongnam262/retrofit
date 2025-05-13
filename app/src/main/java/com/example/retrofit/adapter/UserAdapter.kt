@@ -37,7 +37,7 @@ class UserAdapter(
     private fun onClickGoToDetail(user: User?) {
         val intent = Intent(context, DetailActivity::class.java)
         val bundle = Bundle()
-        bundle.putSerializable("object user", user)
+        bundle.putSerializable("object_user", user)
         intent.putExtras(bundle)
         context.startActivity(intent)
     }
