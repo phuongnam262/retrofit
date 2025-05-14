@@ -19,5 +19,6 @@ class DetailActivity : AppCompatActivity() {
         val title=findViewById<TextView>(R.id.title_detail)
         title.text=product.title
 
+
     }
 }

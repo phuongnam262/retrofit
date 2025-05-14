@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.retrofit.adapter.UserAdapter
+import com.example.retrofit.adapter.ProductAdapter
 import com.example.retrofit.my_interface.ApiService
 import com.example.retrofit.model.Product
 import com.example.retrofit.my_interface.ClickItemListener
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<Product>>
             ) {
                 val mListUser = response.body() ?: emptyList()
-                val productAdapter = UserAdapter(mListUser as MutableList<Product>, object : ClickItemListener {
+                val productAdapter = ProductAdapter(mListUser as MutableList<Product>, object : ClickItemListener {
                     override fun onClickItem(product: Product) {
                         onClickGoToDetail(product)
                     }
