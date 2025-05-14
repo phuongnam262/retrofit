@@ -36,7 +36,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun displayProductDetails(product: Product) {
         findViewById<TextView>(R.id.title_detail).text = product.title
-        findViewById<TextView>(R.id.price_detail).text = product.price
+        findViewById<TextView>(R.id.price_detail).text = buildString {
+        append("$")
+        append(product.price)
+    }
         findViewById<TextView>(R.id.description_detail).text = product.description
         Glide.with(this).load(product.image).into(findViewById(R.id.img_detail))
         // Xử lý nút Add to Cart

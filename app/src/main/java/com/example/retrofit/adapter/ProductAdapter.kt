@@ -27,7 +27,10 @@ class ProductAdapter(
         val product = mListProducts[position]
 
         holder.productTitle.text = product.title
-        holder.productPrice.text = product.price.toString()
+        holder.productPrice.text = buildString {
+        append("$")
+        append(product.price)
+    }
         Glide.with(holder.itemView.context)
             .load(product.image)
             .into(holder.productImg)
