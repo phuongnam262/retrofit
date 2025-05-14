@@ -3,6 +3,7 @@ package com.example.retrofit
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import retrofit2.Response
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var recOtherProducts: RecyclerView
+    private var currentQuantity = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +32,31 @@ class DetailActivity : AppCompatActivity() {
             return
         }
 
+        setupAddandRemoveQuantity()
         displayProductDetails(product)
         setupOtherProductsRecyclerView(product.id)
+    }
+
+    private fun setupAddandRemoveQuantity() {
+        val btnDecrease = findViewById<ImageButton>(R.id.btnDecrease)
+        val btnIncrease = findViewById<ImageButton>(R.id.btnIncrease)
+        val tvQuantity = findViewById<TextView>(R.id.tvQuantity)
+        // Giảm số lượng (tối thiểu = 1)
+        btnDecrease.setOnClickListener {
+            if (currentQuantity > 1) {
+                currentQuantity--
+                tvQuantity.text = currentQuantity.toString()
+            }
+        }
+
+        // Tăng số lượng (tối đa = 10)
+        btnIncrease.setOnClickListener {
+            if (currentQuantity < 10) {
+                currentQuantity++
+                tvQuantity.text = currentQuantity.toString()
+            }
+        }
+
     }
 
     private fun displayProductDetails(product: Product) {
@@ -40,6 +65,7 @@ class DetailActivity : AppCompatActivity() {
         append("$")
         append(product.price)
     }
+
         findViewById<TextView>(R.id.description_detail).text = product.description
         Glide.with(this).load(product.image).into(findViewById(R.id.img_detail))
         // Xử lý nút Add to Cart
