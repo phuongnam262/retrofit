@@ -25,7 +25,7 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = mListProducts[position]
-//        holder.productId.text = product.id.toString()
+
         holder.productTitle.text = product.title
         holder.productPrice.text = product.price.toString()
         Glide.with(holder.itemView.context)
@@ -44,11 +44,9 @@ class ProductAdapter(
     }
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val productId: TextView = itemView.findViewById(R.id.product_id)
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
         val productImg: ImageView = itemView.findViewById(R.id.img_detail)
         val layoutItem: CardView = itemView.findViewById(R.id.layout_item)
-
     }
 }

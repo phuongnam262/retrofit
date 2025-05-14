@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                         onClickGoToDetail(product)
                     }
                 })
-                recProduct.adapter = productAdapter  // ✅ sửa tên biến đúng
+                recProduct.adapter = productAdapter
             }
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {

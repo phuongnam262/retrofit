@@ -20,7 +20,8 @@
             android:id="@+id/img_detail"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
