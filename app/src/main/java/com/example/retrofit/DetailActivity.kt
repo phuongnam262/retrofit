@@ -3,17 +3,21 @@ package com.example.retrofit
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.retrofit.adapter.OtherProductsAdapter
 import com.example.retrofit.model.Product
+import retrofit2.Callback
+import com.example.retrofit.my_interface.ApiService
+import retrofit2.Call
+import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var recOtherProducts: RecyclerView
-    private lateinit var mListProduct: MutableList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,24 +41,33 @@ class DetailActivity : AppCompatActivity() {
         description.text=product.description
 
         recOtherProducts = findViewById(R.id.recOtherProducts)
-        setupOtherProductsRecyclerView()
+        setupOtherProductsRecyclerView(product.id)
     }
 
-    private fun setupOtherProductsRecyclerView() {
-        // 1. Tạo dữ liệu mẫu (thay bằng dữ liệu thực tế)
-        val otherProducts = listOf(
-            Product("Banana", "$1.50 /kg", "Description..."),
-            Product("Orange", "$2.50 /kg", "Description...")
-        )
+    private fun setupOtherProductsRecyclerView(currentProductId: String?) {
+        ApiService.apiService.getListProducts(productId = 1).enqueue(object : Callback<List<Product>> {
+            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
+                val allProducts = response.body() ?: emptyList()
 
-        // 2. Thiết lập LayoutManager (ngang)
-        recOtherProducts.layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
+                // Lọc ra các sản phẩm khác (không phải sản phẩm hiện tại)
+                val otherProducts = allProducts.filter { it.id != currentProductId }
 
-        // 3. Gán Adapter
-        recOtherProducts.adapter = OtherProductsAdapter(otherProducts)
+                // Lấy ngẫu nhiên 5 sản phẩm (hoặc ít hơn nếu không đủ)
+                val randomOtherProducts = otherProducts.shuffled().take(5)
+
+                // Thiết lập RecyclerView
+                recOtherProducts.layoutManager = LinearLayoutManager(
+                    this@DetailActivity,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+
+                recOtherProducts.adapter = OtherProductsAdapter(randomOtherProducts)
+            }
+
+            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                Toast.makeText(this@DetailActivity, "Failed to load other products", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
