@@ -17,21 +17,21 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mRcvUser: RecyclerView
+    private lateinit var recProduct: RecyclerView
     private lateinit var mListProduct: MutableList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mRcvUser = findViewById(R.id.rcv_users)
+        recProduct = findViewById(R.id.rec_product)
         val linearLayoutManager = LinearLayoutManager(this)
-        mRcvUser.layoutManager = linearLayoutManager
+        recProduct.layoutManager = linearLayoutManager
 
         mListProduct = ArrayList()
 
         val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        mRcvUser.addItemDecoration(itemDecoration)
+        recProduct.addItemDecoration(itemDecoration)
 
         callApiGetUsers()
     }
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                         onClickGoToDetail(product)
                     }
                 })
-                mRcvUser.adapter = productAdapter  // ✅ sửa tên biến đúng
+                recProduct.adapter = productAdapter  // ✅ sửa tên biến đúng
             }
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
