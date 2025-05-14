@@ -15,7 +15,7 @@ class DetailActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle == null) return
 
-        val product = bundle.get("object_user") as? Product ?: return
+        val product = bundle.get("object_product") as? Product ?: return
         val id=findViewById<TextView>(R.id.id_detail)
         id.text=product.id.toString()
         val title=findViewById<TextView>(R.id.title_detail)

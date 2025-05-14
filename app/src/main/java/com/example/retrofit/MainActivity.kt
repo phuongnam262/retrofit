@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit.adapter.ProductAdapter
 import com.example.retrofit.my_interface.ApiService
 import com.example.retrofit.model.Product
 import com.example.retrofit.my_interface.ClickItemListener
 import retrofit2.Call
-import retrofit2.Callback  // ✅ thêm dòng này
+import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recProduct = findViewById(R.id.rec_product)
-        val linearLayoutManager = LinearLayoutManager(this)
-        recProduct.layoutManager = linearLayoutManager
+        recProduct.layoutManager = GridLayoutManager(this, 2)
 
         mListProduct = ArrayList()
 
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun callApiGetUsers() {
-        ApiService.apiService.getListUsers(userId = 1).enqueue(object : Callback<List<Product>> {
+        ApiService.apiService.getListProducts(productId = 1).enqueue(object : Callback<List<Product>> {
             override fun onResponse(
                 call: Call<List<Product>>,
                 response: Response<List<Product>>
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     private fun onClickGoToDetail(product: Product?) {
         val intent = Intent(this, DetailActivity::class.java)
         val bundle = Bundle()
-        bundle.putSerializable("object_user", product)
+        bundle.putSerializable("object_product", product)
         intent.putExtras(bundle)
         this.startActivity(intent)
     }

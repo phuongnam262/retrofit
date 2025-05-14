@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("products")
-    fun getListUsers(@Query("userId") userId: Int): Call<List<Product>>
+    fun getListProducts(@Query("productId") productId: Int): Call<List<Product>>
 
     companion object {
         private const val BASE_URL =  "https://fakestoreapi.com/"
