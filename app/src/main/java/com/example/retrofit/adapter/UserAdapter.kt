@@ -7,12 +7,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit.R
-import com.example.retrofit.model.User
+import com.example.retrofit.model.Product
 import com.example.retrofit.my_interface.ClickItemListener
 
 
 class UserAdapter(
-    private val mListUsers: MutableList<User>,
+    private val mListProducts: MutableList<Product>,
     private val onClick: ClickItemListener
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -22,7 +22,7 @@ class UserAdapter(
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = mListUsers[position]
+        val user = mListProducts[position]
         holder.tvId.text = user.id.toString()
         holder.tvTitle.text = user.title
         holder.layoutItem.setOnClickListener {
@@ -34,7 +34,7 @@ class UserAdapter(
 
 
     override fun getItemCount(): Int {
-        return mListUsers.size
+        return mListProducts.size
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

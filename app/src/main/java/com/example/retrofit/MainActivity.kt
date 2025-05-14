@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit.adapter.UserAdapter
 import com.example.retrofit.my_interface.ApiService
-import com.example.retrofit.model.User
+import com.example.retrofit.model.Product
 import com.example.retrofit.my_interface.ClickItemListener
 import retrofit2.Call
 import retrofit2.Callback  // ✅ thêm dòng này
@@ -18,7 +18,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mRcvUser: RecyclerView
-    private lateinit var mListUser: MutableList<User>
+    private lateinit var mListProduct: MutableList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         mRcvUser.layoutManager = linearLayoutManager
 
-        mListUser = ArrayList()
+        mListProduct = ArrayList()
 
         val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         mRcvUser.addItemDecoration(itemDecoration)
@@ -37,29 +37,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun callApiGetUsers() {
-        ApiService.apiService.getListUsers(userId = 1).enqueue(object : Callback<List<User>> {
+        ApiService.apiService.getListUsers(userId = 1).enqueue(object : Callback<List<Product>> {
             override fun onResponse(
-                call: Call<List<User>>,
-                response: Response<List<User>>
+                call: Call<List<Product>>,
+                response: Response<List<Product>>
             ) {
                 val mListUser = response.body() ?: emptyList()
-                val userAdapter = UserAdapter(mListUser as MutableList<User>, object : ClickItemListener {
-                    override fun onClickItem(user: User) {
-                        onClickGoToDetail(user)
+                val productAdapter = UserAdapter(mListUser as MutableList<Product>, object : ClickItemListener {
+                    override fun onClickItem(product: Product) {
+                        onClickGoToDetail(product)
                     }
                 })
-                mRcvUser.adapter = userAdapter  // ✅ sửa tên biến đúng
+                mRcvUser.adapter = productAdapter  // ✅ sửa tên biến đúng
             }
 
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "onFailure", Toast.LENGTH_SHORT).show()
             }
         })
     }
-    private fun onClickGoToDetail(user: User?) {
+    private fun onClickGoToDetail(product: Product?) {
         val intent = Intent(this, DetailActivity::class.java)
         val bundle = Bundle()
-        bundle.putSerializable("object_user", user)
+        bundle.putSerializable("object_user", product)
         intent.putExtras(bundle)
         this.startActivity(intent)
     }
