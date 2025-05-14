@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -48,7 +47,7 @@ class ProductAdapter(
 //        val productId: TextView = itemView.findViewById(R.id.product_id)
         val productTitle: TextView = itemView.findViewById(R.id.product_title)
         val productPrice: TextView = itemView.findViewById(R.id.product_price)
-        val productImg: ImageView = itemView.findViewById(R.id.product_img)
+        val productImg: ImageView = itemView.findViewById(R.id.img_detail)
         val layoutItem: CardView = itemView.findViewById(R.id.layout_item)
 
     }
