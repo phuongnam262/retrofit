@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                 call: Call<List<Product>>,
                 response: Response<List<Product>>
             ) {
-                val mListUser = response.body() ?: emptyList()
-                val productAdapter = ProductAdapter(mListUser as MutableList<Product>, object : ClickItemListener {
+                val mListProduct = response.body() ?: emptyList()
+                val productAdapter = ProductAdapter(mListProduct as MutableList<Product>, object : ClickItemListener {
                     override fun onClickItem(product: Product) {
                         onClickGoToDetail(product)
                     }
