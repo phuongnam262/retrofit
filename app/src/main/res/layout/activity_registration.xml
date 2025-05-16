@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF"
+    android:id="@+id/regis">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Back arrow if needed -->
+        <!-- <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="start"
+            android:layout_marginBottom="16dp"/> -->
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Let's Get Started!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="24dp" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create an account to Q Allure to get all features"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textAlignment="center" />
+
+        <!-- Name -->
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:hint="Full Name"
+            android:drawableStart="@drawable/person"
+            android:drawablePadding="10dp"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPersonName" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:hint="Email"
+            android:drawableStart="@drawable/mail"
+            android:drawablePadding="10dp"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textEmailAddress" />
+
+        <!-- Phone -->
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:hint="Phone"
+            android:drawableStart="@drawable/phone"
+            android:drawablePadding="10dp"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="phone" />
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:hint="Password"
+            android:drawableStart="@drawable/pass"
+            android:drawablePadding="10dp"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPassword" />
+
+        <!-- Confirm Password -->
+        <EditText
+            android:id="@+id/et_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:hint="Confirm Password"
+            android:drawableStart="@drawable/pass"
+            android:drawablePadding="10dp"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPassword" />
+
+        <!-- Create Button -->
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:text="CREATE"
+            android:textAllCaps="false"
+            android:backgroundTint="#2961FF"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <!-- Login redirect -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? "
+                android:textSize="14sp"
+                android:textColor="#888888" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login here"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#2961FF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
