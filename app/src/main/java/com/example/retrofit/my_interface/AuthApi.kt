@@ -1,28 +1,28 @@
 package com.example.retrofit.my_interface
 
 import com.example.retrofit.model.User
-import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface AuthApi {
     @GET("users")
-    fun getListUsers(@Query("userId") userId: Int): Call<List<User>>
+    fun getUsers(): Call<UserResponse>
 
     companion object {
-        private const val BASE_URL =  "https://dummyjson.com/"
+        private const val BASE_URL = "https://dummyjson.com/"
 
-        val apiService: ApiService by lazy {
-            val gson = GsonBuilder().create()
-
+        val apiService: AuthApi by lazy {
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(ApiService::class.java)
+                .create(AuthApi::class.java)
         }
     }
+
+    data class UserResponse(
+        val users: List<User>
+    )
 }
