@@ -39,10 +39,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        getListUsers();
+        callApiGetUsers();
     }
 
-    private fun getListUsers() {
+    private fun callApiGetUsers() {
         AuthApi.apiService.getUsers().enqueue(object : Callback<AuthApi.UserResponse> {
             override fun onResponse(call: Call<AuthApi.UserResponse>, response: Response<AuthApi.UserResponse>) {
                 mListUser = response.body()?.users ?: emptyList()
